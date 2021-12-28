@@ -85,6 +85,7 @@ void heap_sort(int* A, int size)
 {
 	int i,j,tmp;
 	build_max_heap(A, size);
+	std::cout << "c建堆完成\n";
 	output_array();
 	for (i = size-1; i >= 0; i--)
 	{
@@ -94,6 +95,7 @@ void heap_sort(int* A, int size)
 		size--;
 		A[size] = tmp;
 		max_heapify(A, size, 0);
+		output_array(); 
 	}
 }
 
@@ -110,12 +112,14 @@ void cpp_heap_sort()
 	for (i = 0; i < MAX_ARRAY; i++) // 构造随机的数字
 		heap.push_back(raw_array[i]);
 	std::make_heap(heap.begin(), heap.end()); // 开始建堆
+	std::cout << "c++建堆完成\n";
 	output(heap);
 	for (i = 0; i < MAX_ARRAY;i++) {  // 反复弹出堆中内容
 		result.push_back(heap.front());
 		std::pop_heap(heap.begin(), heap.end());
 		heap.pop_back();
 	}
+	std::cout << "c++排序完成\n";
 	output(result);
 }
 
@@ -128,6 +132,7 @@ int main(int argn, char* argc[])
 	}
 	MAX_ARRAY = atoi(argc[1]);
 	NUMBER_RANGE = atoi(argc[2]);
+	init_rand_env();
 
 	raw_array = (int *)malloc(sizeof(int) * MAX_ARRAY);
 	rand_array_number();
