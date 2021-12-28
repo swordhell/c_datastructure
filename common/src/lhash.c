@@ -4,16 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
-#ifdef _WIN32
-#include <Windows.h>
-#define bzero ZeroMemory
-#endif
-
-#ifdef Linux
 #include <strings.h>
-#define closesocket close
-#endif
 
 typedef struct hash_node {
     list_head		link_;
@@ -47,19 +38,18 @@ void *
 create_hash( unsigned long _hash_size , unsigned long _free_size, const char* _name ) {
 
     hash_host *host = NULL;
-    int size        = 0;
+    size_t size     = 0;
     unsigned long i = 0;
 
 
     host = ( hash_host * )malloc( sizeof( hash_host ) );
-    bzero( host, sizeof( hash_host ) );
+    memset( host, 0, sizeof( hash_host ) );
 
 
     size                    = strlen( _name );
     host->tag_name_         = malloc( size + 1 );
     host->tag_name_[ size ] = '\0';
     memcpy( host->tag_name_, _name, size );
-
 
     for ( i = 1; i < 32; i ++ ) {
         if( _hash_size <= (unsigned long)( 1 << i ) ) break;
@@ -221,7 +211,7 @@ hash_del( void *_hash, unsigned long _key ) {
             list_del( &(node->hash_) );
             list_del( &(node->link_) );
 
-            index = node - host->free_node_array_;
+            index = (int)(node - host->free_node_array_);
             if(index >= 0 && (unsigned long)index < host->free_list_size_) {
                 llist_add( &(node->link_), &host->link_free_ );
             } else {
