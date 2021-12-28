@@ -24,4 +24,6 @@ include_directories( ${CMAKE_CURRENT_LIST_DIR}/common/src )
 #add_subdirectory(common)
 #add_subdirectory(test_hash)
 #add_subdirectory(test_list)
-add_subdirectory(test_heapsort)
+#add_subdirectory(test_heapsort)
+add_subdirectory(test_rbtree)
+
