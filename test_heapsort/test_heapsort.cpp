@@ -83,17 +83,15 @@ void build_max_heap(int* A, int size)
 // 堆排序
 void heap_sort(int* A, int size)
 {
-	int i,j,tmp;
+	int i,tmp;
 	build_max_heap(A, size);
-	std::cout << "c建堆完成\n";
+	std::cout << "C make heap finish\n";
 	output_array();
-	for (i = size-1; i >= 0; i--)
-	{
+	for (i = size-1; i > 0; i--) {
 		tmp = A[0];
-		for (j = 1; j < size; j++)
-			A[j - 1] = A[j];
-		size--;
-		A[size] = tmp;
+		A[0] = A[i];
+		A[i] = tmp;
+		size--;		
 		max_heapify(A, size, 0);
 		output_array(); 
 	}
@@ -112,14 +110,14 @@ void cpp_heap_sort()
 	for (i = 0; i < MAX_ARRAY; i++) // 构造随机的数字
 		heap.push_back(raw_array[i]);
 	std::make_heap(heap.begin(), heap.end()); // 开始建堆
-	std::cout << "c++建堆完成\n";
+	std::cout << "c++ make_heap finish\n";
 	output(heap);
 	for (i = 0; i < MAX_ARRAY;i++) {  // 反复弹出堆中内容
 		result.push_back(heap.front());
 		std::pop_heap(heap.begin(), heap.end());
 		heap.pop_back();
 	}
-	std::cout << "c++排序完成\n";
+	std::cout << "c++ sort finish\n";
 	output(result);
 }
 
