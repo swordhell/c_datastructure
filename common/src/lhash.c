@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#ifdef Linux
 #include <strings.h>
+#endif
 
 typedef struct hash_node {
     list_head		link_;
