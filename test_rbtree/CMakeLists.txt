@@ -1,5 +1,5 @@
 
-add_executable( test_rbtree test_rbtree.cpp)
+add_executable( test_rbtree test_rbtree.c)
 
 set_target_properties(test_rbtree PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../lib"
