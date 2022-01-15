@@ -38,9 +38,7 @@ void left_rotate(struct tree* T, struct node* x) {
 	y = x->right;
 	x->right = y->left;
 	if (y->left == 0)
-	{
 		y->left->p = x;
-	}
 	y->p = x->p;
 	if (x->p == 0)
 		T->root = y;
