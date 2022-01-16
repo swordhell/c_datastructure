@@ -37,7 +37,7 @@ void left_rotate(struct tree* T, struct node* x) {
 	
 	y = x->right;
 	x->right = y->left;
-	if (y->left == 0)
+	if (y->left != 0)
 		y->left->p = x;
 	y->p = x->p;
 	if (x->p == 0)
@@ -47,6 +47,57 @@ void left_rotate(struct tree* T, struct node* x) {
 	else
 		x->p->right = y;
 	x->p = y;
+
+}
+
+void right_rotate(struct tree* T, struct node* x) {
+	struct node* y;
+
+	y = x->left;
+	x->left = y->right;
+
+	if (y->right != 0)
+		y->right->p = x;
+	y->p = x->p;
+	if (x->p == 0)
+		T->root = y;
+	else if (x == x->p->left)
+		x->p->left = y;
+	else
+		x->p->right = y;
+	x->p = y;
+}
+
+void rb_insert(struct tree* T,struct node* z ) {
+	struct node* x,* y;
+	y = 0;
+	x = T->root;
+	while (x != 0) {
+		y = x;
+		if (z->key < x->key)
+			x = x->left;
+		else
+			x = x->right;
+	}
+	z->p = y;
+	if ( y == 0){
+		T->root = z;
+	}
+	else if (z->key < y->key) {
+		y->left = z;
+	}
+	else
+	{
+		y->right = z;
+	}
+	z->left = 0;
+	z->right = 0;
+	z->color = RED;
+
+	rb_insert_fixup(T, z);
+}
+
+void rb_insert_fixup(struct tree* T, struct node* z) {
 
 }
 
