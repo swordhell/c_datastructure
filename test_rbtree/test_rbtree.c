@@ -20,7 +20,7 @@ struct node {
 	int key;
 	struct node* left;
 	struct node* right;
-	void* p;
+	struct node* p;
 };
 
 struct tree {
