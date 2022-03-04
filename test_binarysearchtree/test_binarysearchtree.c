@@ -20,9 +20,9 @@
 * 树的结点
 */
 struct node {
-	node* left;
-	node* right;
-	node* p;
+	struct node* left;
+	struct node* right;
+	struct node* p;
 	int key;
 };
 
@@ -30,7 +30,7 @@ struct node {
 * 树结构
 */
 struct tree {
-	node* root;
+	struct node* root;
 };
 
 // 种随机数
@@ -40,7 +40,7 @@ void init_rand_env()
 }
 
 // 中序遍历树
-void inorder_tree_walk(node* x)
+void inorder_tree_walk(struct node* x)
 {
 	if (x != 0)
 	{
@@ -51,7 +51,7 @@ void inorder_tree_walk(node* x)
 }
 
 // 查找
-node* bst_search(node* x, int key)
+struct node* bst_search(struct node* x, int key)
 {
 	if (x == 0 || x->key == key)
 	{
@@ -69,7 +69,7 @@ node* bst_search(node* x, int key)
 
 // 查找最小数
 // 其实就树里面最左边的叶子
-node* bst_minimum(node* x)
+struct node* bst_minimum(struct node* x)
 {
 	assert(x != 0);
 	while (x->left != 0)
@@ -81,7 +81,7 @@ node* bst_minimum(node* x)
 
 // 查找最小数
 // 其实就树里面最右边的叶子
-node* bst_maximum(node* x)
+struct node* bst_maximum(struct node* x)
 {
 	assert(x != 0);
 	while (x->right != 0)
@@ -94,9 +94,9 @@ node* bst_maximum(node* x)
 /**
  * 给定一棵二叉搜索树中的一个结点，有时候需要按中序遍历的次序查找它的后继。
  */
-node* bst_tree_successor(node* x)
+struct node* bst_tree_successor(struct node* x)
 {
-	node* y = 0;
+	struct node* y = 0;
 	if (x->right != 0)
 	{
 		return bst_minimum(x->right);
@@ -114,10 +114,10 @@ node* bst_tree_successor(node* x)
 * 作为输入，其中 z. key=v, z. left=NIL, z. right=NIL 。这个过程要修改 的某些属性，
 * 来把 插入到树中的相应位置上。
 */
-void bst_tree_insert(tree& T, node* z)
+void bst_tree_insert(struct tree* T, struct node* z)
 {
-	node* y = 0;
-	node* x = T.root;
+	struct node* y = 0;
+	struct node* x = T->root;
 	while (x != 0) // 找到合适的插入叶子结点
 	{
 		y = x;
@@ -128,7 +128,7 @@ void bst_tree_insert(tree& T, node* z)
 	}
 	z->p = y;
 	if (y == 0)
-		T.root = z;
+		T->root = z;
 	else if (z->key < y->key)
 		y->left = z;
 	else
@@ -138,7 +138,7 @@ void bst_tree_insert(tree& T, node* z)
 /**
 * 删除一棵树并且遍历子树
 */
-void release_tree(node* x)
+void release_tree(struct node* x)
 {
 	if (x == 0)
 		return;
@@ -147,16 +147,17 @@ void release_tree(node* x)
 	free(x);
 }
 
-#define new_node(n) z = (node*)malloc(sizeof(node));\
+#define new_node(n) z = (struct node*)malloc(sizeof(struct node));\
 	z->key = n; z->right = 0; z->left = 0; z->p = 0;
 
 int main(int argn, char* argc[])
 {
-	init_rand_env();
+	struct tree *T;
+	struct node* z = 0;
 
-	tree T;
-	T.root = 0;
-	node* z = 0;
+	init_rand_env();
+	T = (struct tree*)malloc(sizeof(struct tree));
+	T->root = 0;
 
 	new_node(12);
 	bst_tree_insert(T, z);
@@ -177,10 +178,11 @@ int main(int argn, char* argc[])
 	new_node(2);
 	bst_tree_insert(T, z);
 
-	inorder_tree_walk(T.root);
+	inorder_tree_walk(T->root);
 
-	z = bst_search(T.root, 9);
+	z = bst_search(T->root, 9);
 
-	release_tree(T.root);
+	release_tree(T->root);
+	free(T);
 	return 0;
 }

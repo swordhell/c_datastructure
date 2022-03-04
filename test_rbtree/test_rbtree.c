@@ -68,6 +68,10 @@ void right_rotate(struct tree* T, struct node* x) {
 	x->p = y;
 }
 
+void rb_insert_fixup(struct tree* T, struct node* z) {
+
+}
+
 void rb_insert(struct tree* T,struct node* z ) {
 	struct node* x,* y;
 	y = 0;
@@ -95,10 +99,6 @@ void rb_insert(struct tree* T,struct node* z ) {
 	z->color = RED;
 
 	rb_insert_fixup(T, z);
-}
-
-void rb_insert_fixup(struct tree* T, struct node* z) {
-
 }
 
 int main(int argn, char* argc[])
