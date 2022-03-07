@@ -18,6 +18,10 @@ int main(int argc, char *argv[]) {
 	for (i = 0; i< 10; i++)
 	{
 		pnode = malloc(sizeof(node));
+		if (pnode == 0) {
+			printf("malloc node fail\n");
+			return -1;
+		}
 		pnode->age = i;
 		INIT_LIST_HEAD(&pnode->lst);
 

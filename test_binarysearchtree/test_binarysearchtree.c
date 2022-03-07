@@ -148,6 +148,7 @@ void release_tree(struct node* x)
 }
 
 #define new_node(n) z = (struct node*)malloc(sizeof(struct node));\
+	if (z==0) return -1;\
 	z->key = n; z->right = 0; z->left = 0; z->p = 0;
 
 int main(int argn, char* argc[])
@@ -157,6 +158,10 @@ int main(int argn, char* argc[])
 
 	init_rand_env();
 	T = (struct tree*)malloc(sizeof(struct tree));
+	if (T == 0)
+	{
+		return -1;
+	}
 	T->root = 0;
 
 	new_node(12);
