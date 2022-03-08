@@ -7,7 +7,12 @@
  * 3. 每个叶子节点(nil)是黑的。
  * 4. 红色节点的叶子是黑色。
  * 5. 对每个结点，从该结点到其子孙节点的所有路径上包含相同数目的黑结点。
+ * 
+ * linux实现的红黑树源码
  * https://github.com/torvalds/linux/blob/master/lib/rbtree.c
+ * 
+ * 绘制二叉树的示例
+ * https://www.yanbinghu.com/2019/04/10/9448.html
  */
 
 enum COLOR {
