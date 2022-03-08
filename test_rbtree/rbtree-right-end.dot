@@ -1,0 +1,15 @@
+// graphviz工具
+ digraph G {
+ node [shape=record, height=0.1];
+
+ node0 [label = "<l> | <m> p | <r>"];
+ node1 [label = "<l> | <m> x | <r>"];
+ node2 [label = "<l> | <m> y | <r>"];
+ node3 [label = "<l> | <m> yl | <r>"];
+ node4 [label = "<l> | <m> yr | <r>"];
+
+ node0:r -> node2:m;
+ node1:l -> node4:m;
+ node2:l -> node3:m;
+ node2:r -> node1:m;
+ }

@@ -25,10 +25,13 @@ struct node {
 
 struct tree {
 	struct node* root;
+	struct node* nil; // 哨兵节点
 };
 
 /**
-* 1.将x的右树y替换x的位置；
+* 左旋函数
+* y为x的右子树
+* 1.将x的y替换x的位置；
 * 2.将y的左树放入x右树；
 * 3.将y原本左树放入x的右树；
 */
@@ -37,22 +40,26 @@ void left_rotate(struct tree* T, struct node* x) {
 	
 	y = x->right;
 	x->right = y->left;
-	if (y->left != 0)
+	if (y->left != T->nil)
 		y->left->p = x;
 	y->p = x->p;
-	if (x->p == 0)
+	if (x->p == T->nil)
 		T->root = y;
 	else if (x == x->p->left)
 		x->p->left = y;
 	else
 		x->p->right = y;
+	y->left = x;
 	x->p = y;
 
 }
 
 /**
  * 右旋转
- * 
+* y为x的左子树子书
+* 1.将x的y替换x的位置；
+* 2.将y的左树放入x右树；
+* 3.将y原本左树放入x的右树；
  */
 void right_rotate(struct tree* T, struct node* x) {
 	struct node* y;
@@ -60,10 +67,10 @@ void right_rotate(struct tree* T, struct node* x) {
 	y = x->left;
 	x->left = y->right;
 
-	if (y->right != 0)
+	if (y->right != T->nil)
 		y->right->p = x;
 	y->p = x->p;
-	if (x->p == 0)
+	if (x->p == T->nil)
 		T->root = y;
 	else if (x == x->p->left)
 		x->p->left = y;
@@ -119,13 +126,21 @@ void rb_insert_fixup(struct tree* T, struct node* z) {
 		}
 	}
 	T->root->color = BLACK;
+	if (T->nil->p == 0)
+	{
+		T->nil = T->root;
+	}
 }
 
+/**
+* 插入函数
+* 
+*/
 void rb_insert(struct tree* T,struct node* z ) {
 	struct node* x,* y;
-	y = 0;
+	y = T->nil;
 	x = T->root;
-	while (x != 0) {
+	while (x != T->nil) {
 		y = x;
 		if (z->key < x->key)
 			x = x->left;
@@ -133,7 +148,7 @@ void rb_insert(struct tree* T,struct node* z ) {
 			x = x->right;
 	}
 	z->p = y;
-	if ( y == 0){
+	if ( y == T->nil){
 		T->root = z;
 	}
 	else if (z->key < y->key) {
@@ -152,7 +167,7 @@ void rb_insert(struct tree* T,struct node* z ) {
 
 void rb_transplant(struct tree* T, struct node* u, struct node* v)
 {
-	if (u->p == 0)
+	if (u->p == T->nil)
 	{
 		T->root = v;
 	}
@@ -169,5 +184,25 @@ void rb_transplant(struct tree* T, struct node* u, struct node* v)
 
 int main(int argn, char* argc[])
 {
+	struct tree* T;
+	struct node* z = 0;
+
+	T = (struct tree*)malloc(sizeof(struct tree));
+	if (T == 0)
+	{
+		printf("malloc T fail.\n");
+		return -1;
+	}
+	T->nil = (struct node*)malloc(sizeof(struct node));
+	if (T->nil == 0)
+	{
+		printf("malloc T->nil fail.\n");
+		return -1;
+	}
+	T->nil->p = 0;
+	T->nil->color = BLACK;
+	T->nil->left = 0;
+	T->nil->right = 0;
+
 	return 0;
 }
