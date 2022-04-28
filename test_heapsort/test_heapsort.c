@@ -46,8 +46,9 @@ int right(int i)
 void max_heapify(int* A, int size, int i)
 {
 	int l, r, largest,tmp;
-	l = left(i);
-	r = right(i);
+	r = 2*(i+1);
+	l = r - 1;
+	
 	if (l < size && A[l] > A[i])
 		largest = l;
 	else
