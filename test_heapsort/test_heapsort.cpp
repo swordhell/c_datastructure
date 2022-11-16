@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -10,22 +10,22 @@ extern int MAX_ARRAY;
 extern int NUMBER_RANGE;
 extern int* raw_array;
 
-// C++Ö±½ÓµÄÊµÏÖ¶ÑÅÅĞò
+// C++ç›´æ¥çš„å®ç°å †æ’åº
 void cpp_heap_sort()
 {
 	std::vector<int> heap;
 	std::vector<int> result;
 	int i = 0;
-	auto output = [](std::vector<int>& heap) {// ´òÓ¡¶ÑĞÅÏ¢
+	auto output = [](std::vector<int>& heap) {// æ‰“å°å †ä¿¡æ¯
 		std::for_each(heap.begin(), heap.end(), [](auto& i) {std::cout << i << " "; }); std::cout << std::endl;
 	};
 	heap.reserve(MAX_ARRAY);
-	for (i = 0; i < MAX_ARRAY; i++) // ¹¹ÔìËæ»úµÄÊı×Ö
+	for (i = 0; i < MAX_ARRAY; i++) // æ„é€ éšæœºçš„æ•°å­—
 		heap.push_back(raw_array[i]);
-	std::make_heap(heap.begin(), heap.end()); // ¿ªÊ¼½¨¶Ñ
+	std::make_heap(heap.begin(), heap.end()); // å¼€å§‹å»ºå †
 	std::cout << "c++ make_heap finish\n";
 	output(heap);
-	for (i = 0; i < MAX_ARRAY; i++) {  // ·´¸´µ¯³ö¶ÑÖĞÄÚÈİ
+	for (i = 0; i < MAX_ARRAY; i++) {  // åå¤å¼¹å‡ºå †ä¸­å†…å®¹
 		result.push_back(heap.front());
 		std::pop_heap(heap.begin(), heap.end());
 		heap.pop_back();

@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -7,13 +7,13 @@ int MAX_ARRAY = 10;
 int NUMBER_RANGE = 100;
 int* raw_array = 0;
 
-// ÖÖËæ»úÊı
+// ç§éšæœºæ•°
 void init_rand_env()
 {
 	srand((unsigned)time(0));
 }
 
-// ²úÉúÒ»ÅúÊı×Ö
+// äº§ç”Ÿä¸€æ‰¹æ•°å­—
 void rand_array_number()
 {
 	int i;
@@ -21,7 +21,7 @@ void rand_array_number()
 		raw_array[i] = rand() % NUMBER_RANGE;
 }
 
-// Êä³öÊı×é
+// è¾“å‡ºæ•°ç»„
 void output_array()
 {
 	int i;
@@ -30,19 +30,19 @@ void output_array()
 	printf("\n");
 }
 
-// ¼ÆËã×ó×ÓÊ÷ÏÂ±ê
+// è®¡ç®—å·¦å­æ ‘ä¸‹æ ‡
 int left(int i)
 {
 	return (i + 1) * 2 - 1;
 }
 
-// ¼ÆËãÓÒ×ÓÊ÷ÏÂ±ê
+// è®¡ç®—å³å­æ ‘ä¸‹æ ‡
 int right(int i)
 {
 	return (i + 1) * 2;
 }
 
-// ¶Ô¶ÑÖĞÄ³¸ö×ÓÊ÷ÅÅĞò
+// å¯¹å †ä¸­æŸä¸ªå­æ ‘æ’åº
 void max_heapify(int* A, int size, int i)
 {
 	int l, r, largest,tmp;
@@ -62,7 +62,7 @@ void max_heapify(int* A, int size, int i)
 	}
 }
 
-// ¹¹½¨×î´ó¶Ñ
+// æ„å»ºæœ€å¤§å †
 void build_max_heap(int* A, int size)
 {
 	int i;
@@ -73,7 +73,7 @@ void build_max_heap(int* A, int size)
 	
 }
 
-// ¶ÑÅÅĞò
+// å †æ’åº
 void heap_sort(int* A, int size)
 {
 	int i,tmp;
